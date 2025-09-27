@@ -1,11 +1,14 @@
 mod analyzer;
+mod cleaner;
 
 use clap::Parser;
 
 #[derive(Parser, Debug)]
-#[command(name = "my_utility")]
-#[command(version = "1.0")]
-#[command(about = "Simple CLI utility")]
+#[command(name = "nmz")]
+#[command(version = "0.1")]
+#[command(
+    about = "A tool to analyze and clean up node_modules directories by removing unnecessary files"
+)]
 struct Args {
     #[arg(long)]
     analyze: bool,
@@ -22,7 +25,7 @@ fn main() {
 
     if args.analyze {
         analyzer::run(&path);
+    } else {
+        cleaner::run();
     }
-
-    println!("{:?}", args);
 }
