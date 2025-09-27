@@ -19,5 +19,5 @@ strip = true
 panic = "abort"
 
 [[bin]]
-name = "npz"
+name = "nmz"
 path = "src/main.rs"

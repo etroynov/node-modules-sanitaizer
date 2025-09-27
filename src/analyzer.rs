@@ -4,7 +4,7 @@ use fs_extra::dir::get_size;
 use glob::{glob_with, MatchOptions};
 use std::collections::HashMap;
 
-const PATTERNS: [&str; 6] = ["tsx", "ts", "md", "html", "map", "test.*"];
+use crate::config::PATTERNS;
 
 pub fn run(path: &str) {
     let mut table = Table::new();

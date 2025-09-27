@@ -1,5 +1,6 @@
 mod analyzer;
 mod cleaner;
+mod config;
 
 use clap::Parser;
 
@@ -26,6 +27,6 @@ fn main() {
     if args.analyze {
         analyzer::run(&path);
     } else {
-        cleaner::run();
+        cleaner::run(&path);
     }
 }
