@@ -1,0 +1,33 @@
+# Rust
+/target
+*.rs
+Cargo.toml
+Cargo.lock
+
+# Source files
+/src
+
+# Development files
+.git
+.gitignore
+.editorconfig
+lefthook.yml
+
+# Scripts
+/scripts
+
+# npm platform packages
+/npm
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Test files
+*.test.*
