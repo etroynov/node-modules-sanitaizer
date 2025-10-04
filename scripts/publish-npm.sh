@@ -19,12 +19,12 @@ echo ""
 
 # Update version in all package.json files
 echo "📝 Updating versions..."
-npm version $VERSION --no-git-tag-version
-cd npm/cli-darwin-arm64 && npm version $VERSION --no-git-tag-version && cd ../..
-cd npm/cli-darwin-x64 && npm version $VERSION --no-git-tag-version && cd ../..
-cd npm/cli-linux-x64 && npm version $VERSION --no-git-tag-version && cd ../..
-cd npm/cli-linux-arm64 && npm version $VERSION --no-git-tag-version && cd ../..
-cd npm/cli-win32-x64 && npm version $VERSION --no-git-tag-version && cd ../..
+npm version $VERSION --no-git-tag-version --allow-same-version
+cd npm/cli-darwin-arm64 && npm version $VERSION --no-git-tag-version --allow-same-version && cd ../..
+cd npm/cli-darwin-x64 && npm version $VERSION --no-git-tag-version --allow-same-version && cd ../..
+cd npm/cli-linux-x64 && npm version $VERSION --no-git-tag-version --allow-same-version && cd ../..
+cd npm/cli-linux-arm64 && npm version $VERSION --no-git-tag-version --allow-same-version && cd ../..
+cd npm/cli-win32-x64 && npm version $VERSION --no-git-tag-version --allow-same-version && cd ../..
 
 # Commit changes
 echo "📦 Committing version bump..."
