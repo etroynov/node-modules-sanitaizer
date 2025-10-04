@@ -1,0 +1,53 @@
+{
+  "name": "node-modules-sanitizer",
+  "version": "0.1.0",
+  "description": "A blazing-fast tool to analyze and clean up node_modules directories by removing unnecessary files",
+  "keywords": [
+    "node_modules",
+    "cleanup",
+    "docker",
+    "optimization",
+    "sanitizer",
+    "typescript",
+    "source-maps"
+  ],
+  "homepage": "https://github.com/etroynov/node-modules-sanitaizer#readme",
+  "bugs": {
+    "url": "https://github.com/etroynov/node-modules-sanitaizer/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/etroynov/node-modules-sanitaizer.git"
+  },
+  "license": "MIT",
+  "author": "Your Name",
+  "bin": {
+    "nmz": "./bin/nmz"
+  },
+  "scripts": {
+    "build": "cargo build --release",
+    "prepublishOnly": "npm run build && npm run copy-binary",
+    "copy-binary": "mkdir -p bin && cp target/release/nmz bin/nmz",
+    "test": "cargo test"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "os": [
+    "darwin",
+    "linux",
+    "win32"
+  ],
+  "files": [
+    "bin/",
+    "README.md",
+    "LICENSE"
+  ],
+  "optionalDependencies": {
+    "@node-modules-sanitizer/cli-darwin-arm64": "0.1.0",
+    "@node-modules-sanitizer/cli-darwin-x64": "0.1.0",
+    "@node-modules-sanitizer/cli-linux-x64": "0.1.0",
+    "@node-modules-sanitizer/cli-linux-arm64": "0.1.0",
+    "@node-modules-sanitizer/cli-win32-x64": "0.1.0"
+  }
+}

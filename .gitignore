@@ -1,5 +1,6 @@
 /target
 /node_modules
 
-package.json
-package-lock.json
+# NPM binaries (generated during build)
+npm/*/nmz
+npm/*/nmz.exe

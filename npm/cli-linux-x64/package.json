@@ -1,0 +1,21 @@
+{
+  "name": "@node-modules-sanitizer/cli-linux-x64",
+  "version": "0.1.0",
+  "description": "node-modules-sanitizer CLI for Linux x64",
+  "license": "MIT",
+  "os": [
+    "linux"
+  ],
+  "cpu": [
+    "x64"
+  ],
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "bin": {
+    "nmz": "./nmz"
+  },
+  "files": [
+    "nmz"
+  ]
+}

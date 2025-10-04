@@ -1,0 +1,21 @@
+{
+  "name": "@node-modules-sanitizer/cli-darwin-x64",
+  "version": "0.1.0",
+  "description": "node-modules-sanitizer CLI for macOS x64",
+  "license": "MIT",
+  "os": [
+    "darwin"
+  ],
+  "cpu": [
+    "x64"
+  ],
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "bin": {
+    "nmz": "./nmz"
+  },
+  "files": [
+    "nmz"
+  ]
+}

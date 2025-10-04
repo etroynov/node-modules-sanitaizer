@@ -2,32 +2,26 @@
 
 set -e
 
-# Build for all platforms
-echo "Building for all platforms..."
+# Build for macOS only (use GitHub Actions for cross-platform builds)
+echo "Building for macOS platforms..."
 
-# macOS ARM64
-echo "Building for macOS ARM64..."
-cargo build --release --target aarch64-apple-darwin
-cp target/aarch64-apple-darwin/release/nmz npm/cli-darwin-arm64/nmz
+# Detect current architecture
+ARCH=$(uname -m)
 
-# macOS x64
-echo "Building for macOS x64..."
-cargo build --release --target x86_64-apple-darwin
-cp target/x86_64-apple-darwin/release/nmz npm/cli-darwin-x64/nmz
+if [ "$ARCH" = "arm64" ]; then
+  echo "Building for macOS ARM64..."
+  cargo build --release
+  mkdir -p npm/cli-darwin-arm64
+  cp target/release/nmz npm/cli-darwin-arm64/nmz
+  echo "✅ macOS ARM64 build complete"
+else
+  echo "Building for macOS x64..."
+  cargo build --release
+  mkdir -p npm/cli-darwin-x64
+  cp target/release/nmz npm/cli-darwin-x64/nmz
+  echo "✅ macOS x64 build complete"
+fi
 
-# Linux x64
-echo "Building for Linux x64..."
-cargo build --release --target x86_64-unknown-linux-gnu
-cp target/x86_64-unknown-linux-gnu/release/nmz npm/cli-linux-x64/nmz
-
-# Linux ARM64
-echo "Building for Linux ARM64..."
-cargo build --release --target aarch64-unknown-linux-gnu
-cp target/aarch64-unknown-linux-gnu/release/nmz npm/cli-linux-arm64/nmz
-
-# Windows x64
-echo "Building for Windows x64..."
-cargo build --release --target x86_64-pc-windows-gnu
-cp target/x86_64-pc-windows-gnu/release/nmz.exe npm/cli-win32-x64/nmz.exe
-
-echo "Build complete!"
+echo ""
+echo "⚠️  Note: For Linux and Windows builds, use GitHub Actions"
+echo "    See .github/workflows/publish.yml"

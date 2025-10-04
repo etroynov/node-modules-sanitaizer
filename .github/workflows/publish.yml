@@ -1,0 +1,96 @@
+name: Publish to npm
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to publish (e.g., 0.1.0)'
+        required: true
+
+jobs:
+  build-and-publish:
+    strategy:
+      matrix:
+        include:
+          - os: macos-latest
+            target: aarch64-apple-darwin
+            package: cli-darwin-arm64
+            binary: nmz
+          - os: macos-latest
+            target: x86_64-apple-darwin
+            package: cli-darwin-x64
+            binary: nmz
+          - os: ubuntu-latest
+            target: x86_64-unknown-linux-gnu
+            package: cli-linux-x64
+            binary: nmz
+          - os: ubuntu-latest
+            target: aarch64-unknown-linux-gnu
+            package: cli-linux-arm64
+            binary: nmz
+          - os: windows-latest
+            target: x86_64-pc-windows-msvc
+            package: cli-win32-x64
+            binary: nmz.exe
+
+    runs-on: ${{ matrix.os }}
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          target: ${{ matrix.target }}
+          override: true
+
+      - name: Install cross-compilation tools (Linux ARM64)
+        if: matrix.target == 'aarch64-unknown-linux-gnu'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gcc-aarch64-linux-gnu
+
+      - name: Build binary
+        run: cargo build --release --target ${{ matrix.target }}
+
+      - name: Copy binary to npm package
+        shell: bash
+        run: |
+          mkdir -p npm/${{ matrix.package }}
+          cp target/${{ matrix.target }}/release/${{ matrix.binary }} npm/${{ matrix.package }}/
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Publish platform package
+        working-directory: npm/${{ matrix.package }}
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+  publish-main:
+    needs: build-and-publish
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Publish main package
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
