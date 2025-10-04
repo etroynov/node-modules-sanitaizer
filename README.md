@@ -118,7 +118,7 @@ Built with Rust and optimized for speed:
 
 ## 📄 License
 
-MIT
+[MIT](./LICENSE)
 
 ## 🤝 Contributing
 
