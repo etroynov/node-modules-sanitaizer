@@ -69,10 +69,14 @@ jobs:
         with:
           node-version: "24"
           registry-url: "https://registry.npmjs.org"
+          always-auth: true
+          always-auth: true
 
       - name: Publish platform package
         working-directory: npm/${{ matrix.package }}
-        run: npm publish --access public
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}" > .npmrc
+          npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
@@ -91,6 +95,8 @@ jobs:
           registry-url: "https://registry.npmjs.org"
 
       - name: Publish main package
-        run: npm publish --access public
+        run: |
+          echo "//registry.npmjs.org/:_authToken=${NODE_AUTH_TOKEN}" > .npmrc
+          npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

@@ -1,6 +1,6 @@
 {
   "name": "node-modules-sanitizer",
-  "version": "0.1.0",
+  "version": "0.0.2",
   "description": "A blazing-fast tool to analyze and clean up node_modules directories by removing unnecessary files",
   "keywords": [
     "node_modules",
@@ -22,7 +22,7 @@
   "license": "MIT",
   "author": "Your Name",
   "bin": {
-    "nmz": "./bin/nmz"
+    "nmz": "bin/nmz"
   },
   "scripts": {
     "build": "cargo build --release",
@@ -44,10 +44,10 @@
     "LICENSE"
   ],
   "optionalDependencies": {
-    "@node-modules-sanitizer/cli-darwin-arm64": "0.1.0",
-    "@node-modules-sanitizer/cli-darwin-x64": "0.1.0",
-    "@node-modules-sanitizer/cli-linux-x64": "0.1.0",
-    "@node-modules-sanitizer/cli-linux-arm64": "0.1.0",
-    "@node-modules-sanitizer/cli-win32-x64": "0.1.0"
+    "@node-modules-sanitizer/cli-darwin-arm64": "0.0.1",
+    "@node-modules-sanitizer/cli-darwin-x64": "0.0.1",
+    "@node-modules-sanitizer/cli-linux-x64": "0.0.1",
+    "@node-modules-sanitizer/cli-linux-arm64": "0.0.1",
+    "@node-modules-sanitizer/cli-win32-x64": "0.0.1"
   }
 }
