@@ -70,7 +70,6 @@ jobs:
           node-version: "24"
           registry-url: "https://registry.npmjs.org"
           always-auth: true
-          always-auth: true
 
       - name: Publish platform package
         working-directory: npm/${{ matrix.package }}
